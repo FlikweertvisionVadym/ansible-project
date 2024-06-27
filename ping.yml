@@ -16,7 +16,7 @@
           add_host:
             name: '{{ inventory_hostname }}'
             groups: successful
-          when: ping_result is succeeded
+          when: ping_result is ok
         - name: Move failed hosts to failed group
           add_host:
             name: '{{ inventory_hostname }}'
