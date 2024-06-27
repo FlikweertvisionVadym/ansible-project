@@ -12,6 +12,7 @@
         msg: Hello world
 - name: Classify hosts based on task result
   hosts: all
+  gather_facts: false
   tasks:
     - name: Move successful hosts to successful group
       add_host:
