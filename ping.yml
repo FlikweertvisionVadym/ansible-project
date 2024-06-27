@@ -1,5 +1,5 @@
 - name: My first play
-  hosts: all
+  hosts: failed_hosts
   gather_facts: false
   tasks:
    - name: Ping my hosts
