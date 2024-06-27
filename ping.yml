@@ -16,5 +16,6 @@
       rescue:
          - name: Set fact
            when: ping_result is failed
-           set_fact: "{ 'changed': true, 'ipv4': host[item].ipv4addrs[0].ipv4addr}"
+           set_fact: 
+             result: "{ 'changed': true, 'ipv4': host[item].ipv4addrs[0].ipv4addr}"
   
