@@ -1,9 +1,11 @@
 - name: My first play
   hosts: all
+  ignore
   tasks:
    - name: Ping my hosts
      block:
       - name: determine hosts that are up
+        ignore_unreachable: true
         wait_for_connection:
           timeout: 10
       - name: Print message
