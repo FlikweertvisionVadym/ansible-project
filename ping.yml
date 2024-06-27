@@ -2,7 +2,6 @@
   hosts: all
   tasks:
    - name: Ping my hosts
-     ansible.builtin.ping:
      block:
       - name: determine hosts that are up
         wait_for_connection:
