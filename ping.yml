@@ -15,12 +15,10 @@
             msg: Hello world
       rescue:
         - name: Move successful hosts to successful group
-          add_host:
-            name: '{{ inventory_hostname }}'
-            groups: successful
+          add_host: hostname={{ item }} groups=successful
+          with_items: groups['all']
           when: ping_result is succeeded
         - name: Move failed hosts to failed group
-          add_host:
-            name: '{{ inventory_hostname }}'
-            groups: failed
+          add_host: hostname={{ item }} groups=failed
+          with_items: groups['all']
           when: ping_result is failed
