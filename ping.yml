@@ -2,22 +2,23 @@
   hosts: all
   gather_facts: false
   tasks:
-    block:
-      - name: determine hosts that are up
-        ignore_unreachable: 'yes'
-        wait_for_connection:
-          timeout: 10
-      - name: Print message
-        ansible.builtin.debug:
-          msg: Hello world
-    rescue:
-      - name: Move successful hosts to successful group
-        add_host:
-          name: '{{ inventory_hostname }}'
-          groups: successful
-        when: ping_result is succeeded
-      - name: Move failed hosts to failed group
-        add_host:
-          name: '{{ inventory_hostname }}'
-          groups: failed
-        when: ping_result is failed
+    - name: ping
+      block:
+        - name: determine hosts that are up
+          ignore_unreachable: 'yes'
+          wait_for_connection:
+            timeout: 10
+        - name: Print message
+          ansible.builtin.debug:
+            msg: Hello world
+      rescue:
+        - name: Move successful hosts to successful group
+          add_host:
+            name: '{{ inventory_hostname }}'
+            groups: successful
+          when: ping_result is succeeded
+        - name: Move failed hosts to failed group
+          add_host:
+            name: '{{ inventory_hostname }}'
+            groups: failed
+          when: ping_result is failed
