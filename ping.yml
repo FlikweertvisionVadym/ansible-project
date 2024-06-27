@@ -5,7 +5,7 @@
    - name: Ping my hosts
      block:
       - name: determine hosts that are up
-        ignore_unreachable: true
+        ignore_unreachable: yes
         wait_for_connection:
           timeout: 10
       - name: Print message
