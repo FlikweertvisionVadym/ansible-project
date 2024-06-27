@@ -14,26 +14,7 @@
           ansible.builtin.debug:
             msg: Hello world
       rescue:
-         - name: Create Inventory
-           when: ping_result is succeeded
-           tower_inventory:
-             name: "Foo Inventory"
-             description: "Our Foo Cloud Servers"
-             organization: "Default"
-             state: present
-         - name: Create Group
-           when: ping_result is succeeded
-           tower_group: 
-             inventory: "Foo Inventory" 
-             name:  Testes 
-           register: fs_group 
-         - name: Create Host
-           when: ping_result is succeeded
-           tower_host:
-             inventory: "Successful hosts" 
-             name: "host"  
-           register: fs_host 
-         - name: Associate host group 
-           when: ping_result is succeeded
-           shell: tower-cli host associate  --host "{{fs_host.id}}" --group "> {{fs_group.id}}"
+         - name: Set fact
+           when: ping_result is failed
+           set_fact: pinged="true"
   
