@@ -2,16 +2,15 @@
   hosts: all
   tasks:
    - name: Ping my hosts
-     register: ping_result
      ansible.builtin.ping:
      block:
       - name: determine hosts that are up
         wait_for_connection:
           timeout: 10
-      rescue:
-        - name: create host group for failed host
-          group_by:
-            key: "failed_hosts"
+     rescue:
+       - name: create host group for failed host
+         group_by:
+           key: "failed_hosts"
    - name: Print message
      ansible.builtin.debug:
       msg: Hello world
