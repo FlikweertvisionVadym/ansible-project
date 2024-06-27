@@ -6,10 +6,10 @@
       - name: determine hosts that are up
         wait_for_connection:
           timeout: 10
+      - name: Print message
+        ansible.builtin.debug:
+          msg: Hello world
      rescue:
        - name: create host group for failed host
          group_by:
            key: "failed_hosts"
-   - name: Print message
-     ansible.builtin.debug:
-      msg: Hello world
