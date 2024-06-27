@@ -3,6 +3,7 @@
   gather_facts: false
   tasks:
     - name: ping
+      when: "'successful' not in group_names"
       block:
         - name: determine hosts that are up
           ignore_unreachable: 'yes'
