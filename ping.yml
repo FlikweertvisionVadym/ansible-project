@@ -1,10 +1,14 @@
 - name: My first play
   hosts: all
-  strategy: free
   tasks:
    - name: Ping my hosts
+     register: ping_result
      ansible.builtin.ping:
      ignore_unreachable: yes
    - name: Print message
      ansible.builtin.debug:
       msg: Hello world
+  - fail:
+        msg: "Machine is not online"
+      when: ping_result.unreachable is defined
+      any_errors_fatal: true
